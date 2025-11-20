@@ -87,11 +87,11 @@
 
 | Splash Screen | Login | Student Dashboard | Profile |
 |:---:|:---:|:---:|:---:|
-| <img src="screenshots/splash.png" width="200"/> | <img src="screenshots/login.png" width="200"/> | <img src="screenshots/home.png" width="200"/> | <img src="screenshots/profile.png" width="200"/> |
+| <img src="screenshots/splash.png" width="200"/> | <img src="screenshots/login.png" width="200"/> | <img src="home.png" width="200"/> | <img src="screenshots/profile.png" width="200"/> |
 
 | Subjects | Practice Test | Progress Analytics | Competitive Exams |
 |:---:|:---:|:---:|:---:|
-| <img src="screenshots/subjects.png" width="200"/> | <img src="screenshots/test.png" width="200"/> | <img src="screenshots/progress.png" width="200"/> | <img src="screenshots/exams.png" width="200"/> |
+| <img src="subjects.png" width="200"/> | <img src="screenshots/test.png" width="200"/> | <img src="screenshots/progress.png" width="200"/> | <img src="screenshots/exams.png" width="200"/> |
 
 </div>
 
