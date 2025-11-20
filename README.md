@@ -2,6 +2,31 @@
 
 AI-powered student assistant app with MVVM architecture, Retrofit, Hilt DI, and Material Design 3.
 
+# CampusHelper - Android App
+
+Your Complete Academic Companion
+
+## Features
+- AI-Generated Practice Tests
+- Progress Tracking & Analytics
+- Competitive Exam Preparation (JEE, NEET, CAT, UPSC, GATE)
+- Study Materials Management
+- Minimalist UI/UX Design
+
+## Tech Stack
+- Kotlin
+- MVVM Architecture
+- Hilt Dependency Injection
+- Retrofit for API calls
+- Material Design 3
+- MPAndroidChart for analytics
+
+## Setup
+1. Clone the repository
+2. Open in Android Studio
+3. Update `local.properties` with your SDK path
+4. Build and run
+
 ## Project Status
 
 ✅ **Core Setup Complete**
