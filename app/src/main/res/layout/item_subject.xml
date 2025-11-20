@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="6dp"
+    app:cardBackgroundColor="#FFFFFF"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Gradient Top Bar -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:background="@drawable/gradient_background"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Icon Background -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_gravity="center_horizontal"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/icon_bg_blue">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="📚"
+                    android:textSize="42sp"/>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Subject Info -->
+            <TextView
+                android:id="@+id/tvSubjectName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Subject Name"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:gravity="center"
+                android:layout_marginTop="16dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/chip_background"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp">
+
+                <TextView
+                    android:id="@+id/tvSubjectCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CODE"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/icon_color_blue"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:textSize="14sp"
+                android:textColor="@color/text_secondary"
+                android:gravity="center"
+                android:layout_marginTop="12dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:lineSpacingExtra="2dp"
+                android:alpha="0.85"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

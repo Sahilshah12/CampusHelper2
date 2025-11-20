@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/student_nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.campushelper.app.ui.student.HomeFragment"
+        android:label="Home" />
+
+    <fragment
+        android:id="@+id/testsFragment"
+        android:name="com.campushelper.app.ui.student.TestsFragment"
+        android:label="Tests" />
+
+    <fragment
+        android:id="@+id/progressFragment"
+        android:name="com.campushelper.app.ui.student.ProgressFragment"
+        android:label="Progress" />
+
+    <fragment
+        android:id="@+id/examsFragment"
+        android:name="com.campushelper.app.ui.student.ExamsFragment"
+        android:label="Exams" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.campushelper.app.ui.student.ProfileFragment"
+        android:label="Profile" />
+
+</navigation>

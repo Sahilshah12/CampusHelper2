@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Material Title *"
+        android:textSize="12sp"
+        android:textColor="?android:attr/textColorSecondary"/>
+
+    <EditText
+        android:id="@+id/etMaterialTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter title"
+        android:inputType="text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Type *"
+        android:textSize="12sp"
+        android:textColor="?android:attr/textColorSecondary"/>
+
+    <AutoCompleteTextView
+        android:id="@+id/actvMaterialType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Select type"
+        android:inputType="none" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Subject *"
+        android:textSize="12sp"
+        android:textColor="?android:attr/textColorSecondary"/>
+
+    <AutoCompleteTextView
+        android:id="@+id/actvSubject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Select subject"
+        android:inputType="none" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="URL *"
+        android:textSize="12sp"
+        android:textColor="?android:attr/textColorSecondary"/>
+
+    <EditText
+        android:id="@+id/etMaterialUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter URL"
+        android:inputType="textUri" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Description"
+        android:textSize="12sp"
+        android:textColor="?android:attr/textColorSecondary"/>
+
+    <EditText
+        android:id="@+id/etMaterialDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter description"
+        android:inputType="textMultiLine"
+        android:minLines="3"
+        android:maxLines="5"
+        android:gravity="top|start" />
+
+</LinearLayout>

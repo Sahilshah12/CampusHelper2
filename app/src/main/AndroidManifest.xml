@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".CampusHelperApp"
+        android:allowBackup="true"
+        android:enableOnBackInvokedCallback="true"
+        android:icon="@drawable/ic_school"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/ic_school"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.CampusHelper"
+        android:usesCleartextTraffic="true">
+
+        <!-- Splash Screen -->
+        <activity
+            android:name=".ui.auth.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.CampusHelper.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Authentication -->
+        <activity
+            android:name=".ui.auth.LoginActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.auth.RegisterActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Student Dashboard -->
+        <activity
+            android:name=".ui.student.StudentDashboardActivity"
+            android:exported="false" />
+
+        <!-- Admin Dashboard -->
+        <activity
+            android:name=".ui.admin.AdminDashboardActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CampusHelper.NoActionBar" />
+
+        <!-- Admin Management Activities -->
+        <activity
+            android:name=".ui.admin.ManageSubjectsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CampusHelper.NoActionBar" />
+
+        <activity
+            android:name=".ui.admin.ManageMaterialsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CampusHelper.NoActionBar" />
+
+        <activity
+            android:name=".ui.admin.ManageExamsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CampusHelper.NoActionBar" />
+
+        <activity
+            android:name=".ui.admin.ViewUsersActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CampusHelper.NoActionBar" />
+
+        <activity
+            android:name=".ui.admin.AddMaterialActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CampusHelper.NoActionBar" />
+
+        <!-- Subject Detail -->
+        <activity
+            android:name=".ui.activity.SubjectDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CampusHelper.NoActionBar" />
+
+        <!-- AI Chat -->
+        <activity
+            android:name=".ui.activity.AiChatActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CampusHelper.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Practice Test -->
+        <activity
+            android:name=".ui.activity.PracticeTestActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CampusHelper.NoActionBar" />
+
+        <!-- Test Result -->
+        <activity
+            android:name=".ui.activity.TestResultActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CampusHelper.NoActionBar" />
+
+        <!-- Test Analysis -->
+        <activity
+            android:name=".ui.activity.TestAnalysisActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CampusHelper.NoActionBar" />
+
+    </application>
+
+</manifest>

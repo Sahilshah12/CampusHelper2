@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardElevation="2dp"
+    app:cardCornerRadius="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvExamName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="?android:attr/textColorPrimary"
+                tools:text="Joint Entrance Examination" />
+
+            <TextView
+                android:id="@+id/tvExamShortName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
+                android:background="@drawable/bg_chip"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="?attr/colorPrimary"
+                tools:text="JEE" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvExamDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="14sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:maxLines="2"
+            android:ellipsize="end"
+            tools:text="National level engineering entrance exam for IITs, NITs, and other prestigious institutes." />
+
+        <TextView
+            android:id="@+id/tvExamDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="12sp"
+            android:textColor="?attr/colorPrimary"
+            tools:text="Exam: Jan 15, 2025" />
+
+        <TextView
+            android:id="@+id/tvExamDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="12sp"
+            android:textColor="?android:attr/textColorSecondary"
+            tools:text="Marks: 300 | Duration: 180 min" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:gravity="end">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEdit"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit"
+                app:icon="@android:drawable/ic_menu_edit" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDelete"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Delete"
+                android:textColor="@color/error"
+                app:icon="@android:drawable/ic_menu_delete"
+                app:iconTint="@color/error" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

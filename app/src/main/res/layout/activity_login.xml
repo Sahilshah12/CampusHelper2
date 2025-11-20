@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/space_background">
+
+    <!-- Animated Starfield -->
+    <com.campushelper.app.ui.custom.StarfieldView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="24dp">
+
+        <!-- App Logo -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:cardCornerRadius="50dp"
+            app:cardElevation="12dp"
+            android:layout_marginBottom="32dp"
+            app:cardBackgroundColor="#60FFFFFF">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_school"
+                android:contentDescription="@string/app_name"
+                app:tint="@color/white" />
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="16dp"
+            android:background="@drawable/blur_card_background"
+            app:cardBackgroundColor="#50FFFFFF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="👋 Welcome Back"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="8dp"
+                    android:letterSpacing="0.02"
+                    android:shadowColor="#000000"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="3" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sign in to continue your learning journey"
+                    android:textSize="14sp"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="28dp"
+                    android:alpha="0.95" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:startIconDrawable="@drawable/ic_email"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/email"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:enabled="true"
+                        android:inputType="textEmailAddress" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:startIconDrawable="@drawable/ic_lock"
+                    app:endIconMode="password_toggle"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/password"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:enabled="true"
+                        android:inputType="textPassword" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="@string/login"
+                    android:textSize="16sp"
+                    app:cornerRadius="8dp" />
+
+                <TextView
+                    android:id="@+id/tvRegister"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dont_have_account"
+                    android:textColor="@color/primary"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:padding="8dp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</ScrollView>
+
+</FrameLayout>

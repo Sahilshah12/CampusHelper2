@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <!-- Header -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="📚 Subject Details"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="?android:attr/textColorPrimary"
+        android:layout_marginBottom="20dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Subject Name"
+        android:layout_marginBottom="16dp"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxStrokeWidth="2dp"
+        app:startIconDrawable="@drawable/ic_book"
+        app:startIconTint="@color/icon_color_blue">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etSubjectName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Subject Code (e.g., CS101)"
+        android:layout_marginBottom="16dp"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxStrokeWidth="2dp"
+        app:startIconDrawable="@drawable/ic_quiz"
+        app:startIconTint="@color/icon_color_green">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etSubjectCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapCharacters"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Description (Optional)"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxStrokeWidth="2dp"
+        app:startIconDrawable="@drawable/ic_materials"
+        app:startIconTint="@color/icon_color_orange">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etSubjectDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine|textCapSentences"
+            android:minLines="3"
+            android:maxLines="5"
+            android:gravity="top|start"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>

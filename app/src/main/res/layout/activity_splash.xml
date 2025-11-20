@@ -1,0 +1,74 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/space_background">
+
+    <!-- Animated Starfield -->
+    <com.campushelper.app.ui.custom.StarfieldView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="32dp">
+
+        <!-- Glowing App Icon -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            app:cardCornerRadius="70dp"
+            app:cardElevation="16dp"
+            app:cardBackgroundColor="#60FFFFFF">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_school"
+                android:contentDescription="@string/app_name"
+                app:tint="@color/white" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="38sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:shadowColor="#000000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="8"
+            android:letterSpacing="0.05" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🚀 AI-Powered Student Assistant"
+            android:textSize="17sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="12dp"
+            android:alpha="0.9"
+            android:shadowColor="#000000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="4" />
+
+        <!-- Loading Indicator -->
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:indeterminateTint="@color/white" />
+
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/space_background">
+
+    <!-- Animated Starfield -->
+    <com.campushelper.app.ui.custom.StarfieldView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="24dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="16dp"
+            android:background="@drawable/blur_card_background"
+            app:cardBackgroundColor="#50FFFFFF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="28dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🚀 Create Account"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="8dp"
+                    android:letterSpacing="0.02"
+                    android:shadowColor="#000000"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="3" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Join thousands of students learning smarter"
+                    android:textSize="14sp"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="28dp"
+                    android:alpha="0.95" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/name"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:enabled="true"
+                        android:inputType="textPersonName" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/email"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:enabled="true"
+                        android:inputType="textEmailAddress" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:endIconMode="password_toggle"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/password"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:enabled="true"
+                        android:inputType="textPassword" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Hidden radio group - only student registration allowed -->
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbStudent"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/student"
+                        android:checked="true" />
+
+                    <RadioButton
+                        android:id="@+id/rbAdmin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/admin" />
+
+                </RadioGroup>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="@string/register"
+                    android:textSize="16sp"
+                    app:cornerRadius="8dp" />
+
+                <TextView
+                    android:id="@+id/tvLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/already_have_account"
+                    android:textColor="@color/primary"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:padding="8dp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</ScrollView>
+
+</FrameLayout>
