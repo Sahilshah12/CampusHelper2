@@ -1,11 +1,10 @@
 package com.campushelper.app.utils
 
+import com.campushelper.app.BuildConfig
+
 object Constants {
-    // API Base URL - Using local backend temporarily (Render is down)
-    // For Android Emulator: use 10.0.2.2 (maps to host machine's localhost)
-    // For Physical Device: use your computer's IP address
-    const val BASE_URL = "http://10.0.2.2:5002/api/"  // Local backend on port 5002
-    // const val BASE_URL = "https://campushelper-be.onrender.com/api/"  // Render backend (currently down)
+    // API Base URL comes from BuildConfig.BASE_URL (set in app/build.gradle.kts)
+    const val BASE_URL = BuildConfig.BASE_URL
     
     // SharedPreferences
     const val PREF_NAME = "campus_helper_prefs"

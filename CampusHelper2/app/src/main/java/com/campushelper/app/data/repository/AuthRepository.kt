@@ -8,6 +8,7 @@ import com.campushelper.app.utils.Resource
 import com.campushelper.app.utils.SessionManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
 import javax.inject.Inject
 
 class AuthRepository @Inject constructor(
@@ -24,7 +25,7 @@ class AuthRepository @Inject constructor(
                     saveUserSession(authResponse)
                     Resource.Success(authResponse)
                 } else {
-                    Resource.Error(response.message() ?: "Registration failed")
+                    Resource.Error(parseApiError(response.errorBody()?.string(), "Registration failed"))
                 }
             } catch (e: Exception) {
                 Resource.Error(e.message ?: "An error occurred")
@@ -41,7 +42,7 @@ class AuthRepository @Inject constructor(
                     saveUserSession(authResponse)
                     Resource.Success(authResponse)
                 } else {
-                    Resource.Error(response.message() ?: "Login failed")
+                    Resource.Error(parseApiError(response.errorBody()?.string(), "Login failed"))
                 }
             } catch (e: Exception) {
                 Resource.Error(e.message ?: "An error occurred")
@@ -57,6 +58,21 @@ class AuthRepository @Inject constructor(
             authResponse.user.email,
             authResponse.user.role
         )
+    }
+
+    private fun parseApiError(rawErrorBody: String?, fallback: String): String {
+        if (rawErrorBody.isNullOrBlank()) return fallback
+
+        return try {
+            val json = JSONObject(rawErrorBody)
+            when {
+                json.has("error") -> json.optString("error", fallback)
+                json.has("message") -> json.optString("message", fallback)
+                else -> fallback
+            }
+        } catch (_: Exception) {
+            fallback
+        }
     }
 
     fun logout() {

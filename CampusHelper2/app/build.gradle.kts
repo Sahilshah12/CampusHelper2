@@ -9,6 +9,9 @@ android {
     namespace = "com.campushelper.app"
     compileSdk = 34
 
+    val apiBaseUrl = (project.findProperty("API_BASE_URL") as String?)
+        ?: "http://10.0.2.2:5002/api/"
+
     defaultConfig {
         applicationId = "com.campushelper.app"
         minSdk = 24
@@ -17,6 +20,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "BASE_URL", "\"$apiBaseUrl\"")
     }
 
     buildTypes {
@@ -39,6 +43,7 @@ android {
     }
     
     buildFeatures {
+        buildConfig = true
         viewBinding = true
         dataBinding = true
     }
