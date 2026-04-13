@@ -58,6 +58,73 @@ app.get('/health', (req, res) => {
   });
 });
 
+// Privacy policy page for Google Play Console
+app.get('/privacy-policy', (req, res) => {
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.send(`
+    <!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Privacy Policy - Campus Helper</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 32px 20px;
+            color: #1f2937;
+            background: #ffffff;
+          }
+          h1, h2 { color: #111827; }
+          p, li { font-size: 16px; }
+          ul { padding-left: 20px; }
+          .updated { color: #6b7280; font-size: 14px; }
+        </style>
+      </head>
+      <body>
+        <h1>Privacy Policy for Campus Helper</h1>
+        <p class="updated">Last updated: ${new Date().toISOString().split('T')[0]}</p>
+
+        <p>Campus Helper is an educational application that helps students manage subjects, study materials, tests, progress tracking, and AI-assisted learning.</p>
+
+        <h2>Information We Collect</h2>
+        <ul>
+          <li>Account details such as name, email address, and password when you register.</li>
+          <li>Learning activity such as test history, progress data, and subject preferences.</li>
+          <li>Uploaded content such as study materials you submit through the app.</li>
+          <li>Basic device and app usage data used for security, diagnostics, and performance.</li>
+        </ul>
+
+        <h2>How We Use Information</h2>
+        <ul>
+          <li>To create and manage user accounts.</li>
+          <li>To provide learning features, including materials, tests, and progress tracking.</li>
+          <li>To improve app performance and fix technical issues.</li>
+          <li>To protect the app from misuse and unauthorized access.</li>
+        </ul>
+
+        <h2>Data Sharing</h2>
+        <p>We do not sell your personal information. We may share data only with trusted service providers that help operate the app, such as hosting, database, and analytics services, or when required by law.</p>
+
+        <h2>Data Security</h2>
+        <p>We use reasonable technical and organizational measures to protect your data, but no online service can guarantee absolute security.</p>
+
+        <h2>Children's Privacy</h2>
+        <p>The app is intended for students and educational use. If you believe a child has provided personal information without consent, contact us so we can review and remove it where appropriate.</p>
+
+        <h2>Changes to This Policy</h2>
+        <p>We may update this policy from time to time. The latest version will always be available at this page.</p>
+
+        <h2>Contact</h2>
+        <p>If you have questions about this privacy policy, contact the app owner or developer through the support channel associated with the app release.</p>
+      </body>
+    </html>
+  `);
+});
+
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/subjects', subjectRoutes);
