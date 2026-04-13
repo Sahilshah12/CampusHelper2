@@ -1,6 +1,7 @@
 package com.campushelper.app.data.repository
 
 import com.campushelper.app.data.model.AiChatRequest
+import com.campushelper.app.data.model.AiChatUiResult
 import com.campushelper.app.data.model.AiChatResponse
 import com.campushelper.app.data.remote.ApiService
 import com.campushelper.app.utils.Resource
@@ -12,7 +13,7 @@ class AiRepository @Inject constructor(
     private val apiService: ApiService
 ) {
 
-    suspend fun chat(subjectId: String, topic: String, question: String?): Resource<String> {
+    suspend fun chat(subjectId: String, topic: String, question: String?): Resource<AiChatUiResult> {
         return withContext(Dispatchers.IO) {
             try {
                 val request = AiChatRequest(subjectId, topic, question)
@@ -23,7 +24,13 @@ class AiRepository @Inject constructor(
                     
                     // Check if the response is successful and has content
                     if (body.success && body.response.isNotBlank()) {
-                        Resource.Success(body.response)
+                        Resource.Success(
+                            AiChatUiResult(
+                                response = body.response,
+                                isFallback = body.fallback == true,
+                                note = body.note
+                            )
+                        )
                     } else {
                         Resource.Error("AI returned an empty response. Please try again.")
                     }

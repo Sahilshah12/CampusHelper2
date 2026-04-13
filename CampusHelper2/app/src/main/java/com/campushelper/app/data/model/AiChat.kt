@@ -9,7 +9,15 @@ data class AiChatRequest(
 data class AiChatResponse(
     val success: Boolean,
     val response: String,
-    val context: ChatContext
+    val context: ChatContext,
+    val fallback: Boolean? = null,
+    val note: String? = null
+)
+
+data class AiChatUiResult(
+    val response: String,
+    val isFallback: Boolean = false,
+    val note: String? = null
 )
 
 data class ChatContext(

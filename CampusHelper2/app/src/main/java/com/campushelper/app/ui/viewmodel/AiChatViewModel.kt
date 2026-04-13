@@ -2,6 +2,7 @@ package com.campushelper.app.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.campushelper.app.data.model.AiChatUiResult
 import com.campushelper.app.data.repository.AiRepository
 import com.campushelper.app.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,8 +16,8 @@ class AiChatViewModel @Inject constructor(
     private val aiRepository: AiRepository
 ) : ViewModel() {
 
-    private val _chatState = MutableStateFlow<Resource<String>?>(null)
-    val chatState: StateFlow<Resource<String>?> = _chatState
+    private val _chatState = MutableStateFlow<Resource<AiChatUiResult>?>(null)
+    val chatState: StateFlow<Resource<AiChatUiResult>?> = _chatState
 
     fun sendMessage(subjectId: String, topic: String, question: String) {
         viewModelScope.launch {

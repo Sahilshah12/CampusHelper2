@@ -113,7 +113,17 @@ class AiChatActivity : AppCompatActivity() {
                             thinkingMessagePosition = -1
                         }
                         
-                        resource.data?.let { responseText ->
+                        resource.data?.let { result ->
+                            val responseText = result.response.trim()
+
+                            if (result.isFallback && !result.note.isNullOrBlank()) {
+                                Toast.makeText(
+                                    this@AiChatActivity,
+                                    result.note,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+
                             if (responseText.isNotBlank()) {
                                 val aiMessage = ChatMessage(
                                     text = responseText,
