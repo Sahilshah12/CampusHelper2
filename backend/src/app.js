@@ -125,6 +125,73 @@ app.get('/privacy-policy', (req, res) => {
   `);
 });
 
+// Account deletion instructions page for Google Play Console
+app.get('/delete-account', (req, res) => {
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.send(`
+    <!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Delete Account - Campus Helper</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 32px 20px;
+            color: #1f2937;
+            background: #ffffff;
+          }
+          h1, h2 { color: #111827; }
+          p, li { font-size: 16px; }
+          ul, ol { padding-left: 20px; }
+          .updated { color: #6b7280; font-size: 14px; }
+          .box {
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 12px 14px;
+            background: #f9fafb;
+          }
+        </style>
+      </head>
+      <body>
+        <h1>Campus Helper - Account Deletion</h1>
+        <p class="updated">Last updated: ${new Date().toISOString().split('T')[0]}</p>
+
+        <p>This page explains how users of <strong>Campus Helper</strong> can request account deletion and what data is deleted or retained.</p>
+
+        <h2>How to Request Account Deletion</h2>
+        <ol>
+          <li>Open the Campus Helper app and sign in.</li>
+          <li>Go to <strong>Profile</strong>.</li>
+          <li>Tap <strong>Delete Account</strong>.</li>
+          <li>Enter your current password and confirm deletion.</li>
+        </ol>
+
+        <h2>Data Deleted Immediately</h2>
+        <ul>
+          <li>User account profile (name, email, role).</li>
+          <li>Learning progress records linked to the account.</li>
+          <li>Test history linked to the account.</li>
+          <li>Materials uploaded by that student account.</li>
+        </ul>
+
+        <h2>Data Retention</h2>
+        <div class="box">
+          <p><strong>Authentication and profile data:</strong> deleted immediately after confirmation.</p>
+          <p><strong>Server logs and security logs:</strong> may be retained for up to 30 days for fraud prevention, legal compliance, and troubleshooting, then automatically removed.</p>
+        </div>
+
+        <h2>Need Help?</h2>
+        <p>If you cannot access your account, contact the Campus Helper developer support channel listed on the Google Play listing.</p>
+      </body>
+    </html>
+  `);
+});
+
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/subjects', subjectRoutes);
