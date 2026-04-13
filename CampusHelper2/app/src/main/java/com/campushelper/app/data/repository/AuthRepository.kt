@@ -1,8 +1,12 @@
 package com.campushelper.app.data.repository
 
 import com.campushelper.app.data.model.AuthResponse
+import com.campushelper.app.data.model.ChangePasswordRequest
+import com.campushelper.app.data.model.DeleteAccountRequest
 import com.campushelper.app.data.model.LoginRequest
+import com.campushelper.app.data.model.MessageResponse
 import com.campushelper.app.data.model.RegisterRequest
+import com.campushelper.app.data.model.UpdateProfileRequest
 import com.campushelper.app.data.remote.ApiService
 import com.campushelper.app.utils.Resource
 import com.campushelper.app.utils.SessionManager
@@ -46,6 +50,55 @@ class AuthRepository @Inject constructor(
                 }
             } catch (e: Exception) {
                 Resource.Error(e.message ?: "An error occurred")
+            }
+        }
+    }
+
+    suspend fun updateProfile(name: String): Resource<String> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = apiService.updateProfile(UpdateProfileRequest(name = name))
+                if (response.isSuccessful && response.body() != null) {
+                    val user = response.body()!!.user
+                    sessionManager.saveUserData(user.id, user.name, user.email, user.role)
+                    Resource.Success("Profile updated successfully")
+                } else {
+                    Resource.Error(parseApiError(response.errorBody()?.string(), "Failed to update profile"))
+                }
+            } catch (e: Exception) {
+                Resource.Error(e.message ?: "Failed to update profile")
+            }
+        }
+    }
+
+    suspend fun changePassword(currentPassword: String, newPassword: String): Resource<String> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = apiService.changePassword(ChangePasswordRequest(currentPassword, newPassword))
+                if (response.isSuccessful && response.body() != null) {
+                    Resource.Success(response.body()!!.message)
+                } else {
+                    Resource.Error(parseApiError(response.errorBody()?.string(), "Failed to change password"))
+                }
+            } catch (e: Exception) {
+                Resource.Error(e.message ?: "Failed to change password")
+            }
+        }
+    }
+
+    suspend fun deleteAccount(currentPassword: String): Resource<String> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = apiService.deleteAccount(DeleteAccountRequest(currentPassword))
+                if (response.isSuccessful && response.body() != null) {
+                    val message = response.body()!!.message
+                    sessionManager.clearSession()
+                    Resource.Success(message)
+                } else {
+                    Resource.Error(parseApiError(response.errorBody()?.string(), "Failed to delete account"))
+                }
+            } catch (e: Exception) {
+                Resource.Error(e.message ?: "Failed to delete account")
             }
         }
     }

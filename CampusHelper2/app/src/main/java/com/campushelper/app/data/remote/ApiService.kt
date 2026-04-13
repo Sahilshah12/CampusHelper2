@@ -20,6 +20,15 @@ interface ApiService {
     
     @GET("auth/users")
     suspend fun getAllUsers(): Response<UsersResponse>
+
+    @PUT("auth/profile")
+    suspend fun updateProfile(@Body request: UpdateProfileRequest): Response<ProfileResponse>
+
+    @PUT("auth/change-password")
+    suspend fun changePassword(@Body request: ChangePasswordRequest): Response<MessageResponse>
+
+    @HTTP(method = "DELETE", path = "auth/account", hasBody = true)
+    suspend fun deleteAccount(@Body request: DeleteAccountRequest): Response<MessageResponse>
     
     // Subjects
     @GET("subjects")

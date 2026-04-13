@@ -1,5 +1,7 @@
 const User = require('../models/userModel');
 const Progress = require('../models/progressModel');
+const Test = require('../models/testModel');
+const Material = require('../models/materialModel');
 const { generateToken } = require('../middlewares/authMiddleware');
 
 // @desc    Register new user
@@ -176,6 +178,50 @@ exports.changePassword = async (req, res) => {
   } catch (error) {
     console.error('Change password error:', error);
     res.status(500).json({ error: 'Failed to change password' });
+  }
+};
+
+// @desc    Delete current user account
+// @route   DELETE /api/auth/account
+// @access  Private
+exports.deleteAccount = async (req, res) => {
+  try {
+    const { currentPassword } = req.body;
+
+    if (!currentPassword) {
+      return res.status(400).json({ error: 'Please provide current password' });
+    }
+
+    const user = await User.findById(req.user._id).select('+password');
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    if (user.role === 'admin') {
+      return res.status(403).json({ error: 'Admin account deletion is not allowed from this screen' });
+    }
+
+    const isPasswordValid = await user.comparePassword(currentPassword);
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: 'Current password is incorrect' });
+    }
+
+    const userId = user._id;
+
+    await Promise.all([
+      Progress.deleteOne({ userId }),
+      Test.deleteMany({ userId }),
+      Material.deleteMany({ uploadedBy: userId }),
+      User.findByIdAndDelete(userId)
+    ]);
+
+    res.json({
+      success: true,
+      message: 'Account deleted successfully'
+    });
+  } catch (error) {
+    console.error('Delete account error:', error);
+    res.status(500).json({ error: 'Failed to delete account' });
   }
 };
 
