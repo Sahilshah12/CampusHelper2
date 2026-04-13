@@ -44,13 +44,42 @@ exports.chat = async (req, res) => {
     });
   } catch (error) {
     console.error('AI chat error:', error);
-    
-    // Send more descriptive error messages
+
+    const { subjectId, topic, question } = req.body;
+    let subjectName = 'General';
+
+    if (subjectId && subjectId !== 'general') {
+      const subject = await Subject.findById(subjectId).catch(() => null);
+      subjectName = subject?.name || 'General';
+    }
+
+    const fallbackResponse = geminiService.generateFallbackChatResponse(subjectName, topic || 'the topic', question);
+
+    const isTransientAiIssue =
+      error.message?.includes('temporarily overloaded') ||
+      error.message?.includes('quota exceeded') ||
+      error.message?.includes('timeout') ||
+      error.message?.includes('Failed to generate content from AI');
+
+    if (isTransientAiIssue) {
+      return res.status(200).json({
+        success: true,
+        fallback: true,
+        response: fallbackResponse,
+        context: {
+          subject: subjectName,
+          topic,
+          question
+        },
+        note: 'AI service is temporarily unavailable. Showing a fallback explanation.'
+      });
+    }
+
     const errorMessage = error.message || 'Failed to get AI response';
-    res.status(500).json({ 
+    res.status(500).json({
       error: errorMessage,
-      hint: error.message?.includes('API key') 
-        ? 'Please configure GEMINI_API_KEY environment variable' 
+      hint: error.message?.includes('API key')
+        ? 'Please configure GEMINI_API_KEY environment variable'
         : undefined
     });
   }

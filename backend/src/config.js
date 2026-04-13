@@ -7,7 +7,7 @@ module.exports = {
   jwtSecret: process.env.JWT_SECRET || 'your_jwt_secret',
   jwtExpire: process.env.JWT_EXPIRE || '7d',
   geminiApiKey: process.env.GEMINI_API_KEY,
-  geminiApiUrl: process.env.GEMINI_API_URL || 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent',
+  geminiApiUrl: process.env.GEMINI_API_URL || 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent',
   corsOrigin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : ['http://localhost:3000'],
   firebase: {
     apiKey: process.env.FIREBASE_API_KEY,

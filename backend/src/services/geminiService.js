@@ -116,6 +116,26 @@ Keep it educational and easy to understand.`;
     return await this.generateContent(prompt);
   }
 
+  generateFallbackChatResponse(subject, topic, question) {
+    const baseExplanation = `Here is a clear explanation of ${topic} in ${subject}.`;
+    const questionPart = question
+      ? ` You asked: "${question}". The short answer is that this topic works by breaking a problem into smaller steps, applying the right rules, and checking the result carefully.`
+      : '';
+
+    return [
+      baseExplanation,
+      questionPart,
+      '',
+      'Key points:',
+      `1. Start with the definition of ${topic}.`,
+      '2. Learn the main idea before memorizing details.',
+      '3. Use one simple example to connect the concept to practice.',
+      '4. Review related terms and common mistakes.',
+      '',
+      'If you want, send a more specific question and I will break it down step by step.'
+    ].join('\n');
+  }
+
   async generatePracticeQuestions(subject, topic, count = 5, difficulty = 'medium') {
     const prompt = `Generate ${count} multiple-choice questions for a practice test.
 
