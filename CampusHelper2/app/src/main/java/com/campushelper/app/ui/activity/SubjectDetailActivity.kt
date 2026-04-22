@@ -12,13 +12,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.campushelper.app.databinding.ActivitySubjectDetailBinding
-import com.campushelper.app.data.remote.ApiService
+import com.campushelper.app.data.model.Subject
 import com.campushelper.app.ui.adapter.MaterialAdapter
 import com.campushelper.app.ui.viewmodel.SubjectViewModel
 import com.campushelper.app.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SubjectDetailActivity : AppCompatActivity() {
@@ -28,9 +27,7 @@ class SubjectDetailActivity : AppCompatActivity() {
     private lateinit var materialAdapter: MaterialAdapter
     private var subjectId: String = ""
     private var currentDialog: AlertDialog? = null
-    
-    @Inject
-    lateinit var apiService: ApiService
+    private var loadedSubjects: List<Subject> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +43,7 @@ class SubjectDetailActivity : AppCompatActivity() {
         observeViewModel()
 
         viewModel.getMaterials(subjectId)
+        viewModel.loadSubjects()
     }
 
     private fun setupToolbar(title: String) {
@@ -112,7 +110,11 @@ class SubjectDetailActivity : AppCompatActivity() {
     }
 
     private fun openPdfFile(fileUrl: String) {
-        val fullUrl = "https://campushelper-be.onrender.com$fileUrl"
+        val fullUrl = if (fileUrl.startsWith("http", ignoreCase = true)) {
+            fileUrl
+        } else {
+            "https://campushelper-bes.onrender.com$fileUrl"
+        }
         
         currentDialog?.dismiss()
         currentDialog = AlertDialog.Builder(this)
@@ -194,37 +196,36 @@ class SubjectDetailActivity : AppCompatActivity() {
                 }
             }
         }
+
+        lifecycleScope.launch {
+            viewModel.subjectsState.collect { resource ->
+                if (resource is Resource.Success) {
+                    loadedSubjects = resource.data ?: emptyList()
+                }
+            }
+        }
     }
 
     private fun showSubjectSelectionDialog() {
-        binding.progressBar.visibility = View.VISIBLE
-        lifecycleScope.launch {
-            try {
-                val response = apiService.getSubjects()
-                binding.progressBar.visibility = View.GONE
-
-                if (response.isSuccessful && response.body() != null) {
-                    val subjects = response.body()!!.subjects
-                    val subjectNames = subjects.map { it.name }.toTypedArray()
-
-                    currentDialog?.dismiss()
-                    currentDialog = AlertDialog.Builder(this@SubjectDetailActivity)
-                        .setTitle("Select Subject for Practice Test")
-                        .setItems(subjectNames) { _, which ->
-                            val selectedSubject = subjects[which]
-                            showTopicInputDialog(selectedSubject._id, selectedSubject.name)
-                        }
-                        .setNegativeButton("Cancel", null)
-                        .create()
-                    currentDialog?.show()
-                } else {
-                    Toast.makeText(this@SubjectDetailActivity, "Failed to load subjects", Toast.LENGTH_SHORT).show()
-                }
-            } catch (e: Exception) {
-                binding.progressBar.visibility = View.GONE
-                Toast.makeText(this@SubjectDetailActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
+        val subjects = loadedSubjects
+        if (subjects.isEmpty()) {
+            Toast.makeText(this, "Subjects are still loading, please try again.", Toast.LENGTH_SHORT).show()
+            viewModel.loadSubjects()
+            return
         }
+
+        val subjectNames = subjects.map { it.name }.toTypedArray()
+
+        currentDialog?.dismiss()
+        currentDialog = AlertDialog.Builder(this)
+            .setTitle("Select Subject for Practice Test")
+            .setItems(subjectNames) { _, which ->
+                val selectedSubject = subjects[which]
+                showTopicInputDialog(selectedSubject._id, selectedSubject.name)
+            }
+            .setNegativeButton("Cancel", null)
+            .create()
+        currentDialog?.show()
     }
 
     private fun showTopicInputDialog(selectedSubjectId: String, subjectName: String) {

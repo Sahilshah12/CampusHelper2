@@ -13,6 +13,9 @@ import com.campushelper.app.ui.adapter.ChatMessageAdapter
 import com.campushelper.app.ui.viewmodel.AiChatViewModel
 import com.campushelper.app.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -23,6 +26,7 @@ class AiChatActivity : AppCompatActivity() {
     private lateinit var chatAdapter: ChatMessageAdapter
     private var subjectId: String = ""
     private var thinkingMessagePosition: Int = -1
+    private var typingJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +71,8 @@ class AiChatActivity : AppCompatActivity() {
     }
 
     private fun sendMessage(message: String) {
+        typingJob?.cancel()
+
         // Add user message to chat
         val userMessage = ChatMessage(
             text = message,
@@ -116,22 +122,19 @@ class AiChatActivity : AppCompatActivity() {
                         resource.data?.let { result ->
                             val responseText = result.response.trim()
 
-                            if (result.isFallback && !result.note.isNullOrBlank()) {
-                                Toast.makeText(
-                                    this@AiChatActivity,
-                                    result.note,
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-
                             if (responseText.isNotBlank()) {
                                 val aiMessage = ChatMessage(
-                                    text = responseText,
+                                    text = "",
                                     isUser = false,
                                     timestamp = System.currentTimeMillis()
                                 )
                                 chatAdapter.addMessage(aiMessage)
-                                binding.recyclerView.scrollToPosition(chatAdapter.itemCount - 1)
+                                val aiMessagePosition = chatAdapter.itemCount - 1
+                                binding.recyclerView.scrollToPosition(aiMessagePosition)
+                                typingJob?.cancel()
+                                typingJob = lifecycleScope.launch {
+                                    animateTyping(aiMessagePosition, responseText)
+                                }
                             } else {
                                 Toast.makeText(
                                     this@AiChatActivity,
@@ -165,5 +168,25 @@ class AiChatActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private suspend fun animateTyping(position: Int, fullText: String) {
+        val step = 2
+        var index = 0
+
+        while (index <= fullText.length) {
+            val displayText = fullText.substring(0, index.coerceAtMost(fullText.length))
+            chatAdapter.updateMessage(position, displayText)
+            binding.recyclerView.scrollToPosition(position)
+            delay(14L)
+            index += step
+        }
+
+        chatAdapter.updateMessage(position, fullText)
+    }
+
+    override fun onDestroy() {
+        typingJob?.cancel()
+        super.onDestroy()
     }
 }

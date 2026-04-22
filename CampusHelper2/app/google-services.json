@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "895949829526",
+    "project_id": "campushelper-64030",
+    "storage_bucket": "campushelper-64030.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:895949829526:android:cdfeec13858035709399b7",
+        "android_client_info": {
+          "package_name": "com.campushelper.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC640HsmxRbOeYsJ9x9eLS4lSqzCMEcDV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:895949829526:android:3a7caf6c22cb4b659399b7",
+        "android_client_info": {
+          "package_name": "com.example.campushelper"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC640HsmxRbOeYsJ9x9eLS4lSqzCMEcDV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

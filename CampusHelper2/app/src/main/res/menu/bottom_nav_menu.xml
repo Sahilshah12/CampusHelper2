@@ -16,11 +16,6 @@
         android:title="@string/progress" />
 
     <item
-        android:id="@+id/examsFragment"
-        android:icon="@drawable/ic_exam"
-        android:title="@string/exams" />
-
-    <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_person"
         android:title="@string/profile" />

@@ -26,6 +26,14 @@ class ChatMessageAdapter : RecyclerView.Adapter<ChatMessageAdapter.MessageViewHo
         }
     }
 
+    fun updateMessage(position: Int, messageText: String) {
+        if (position >= 0 && position < messages.size) {
+            val message = messages[position]
+            messages[position] = message.copy(text = messageText)
+            notifyItemChanged(position)
+        }
+    }
+
     fun setMessages(newMessages: List<ChatMessage>) {
         messages.clear()
         messages.addAll(newMessages)

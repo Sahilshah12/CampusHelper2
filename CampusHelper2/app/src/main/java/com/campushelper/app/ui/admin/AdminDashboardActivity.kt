@@ -2,6 +2,7 @@ package com.campushelper.app.ui.admin
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -58,10 +59,9 @@ class AdminDashboardActivity : AppCompatActivity() {
         binding.cardMaterials.setOnClickListener {
             startActivity(Intent(this, ManageMaterialsActivity::class.java))
         }
-        
-        binding.cardExams.setOnClickListener {
-            startActivity(Intent(this, ManageExamsActivity::class.java))
-        }
+
+        // Competitive exams are hidden until Firebase migration is complete.
+        binding.cardExams.visibility = View.GONE
         
         binding.cardUsers.setOnClickListener {
             startActivity(Intent(this, ViewUsersActivity::class.java))

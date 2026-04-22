@@ -6,21 +6,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.campushelper.app.data.model.User
 import com.campushelper.app.databinding.ActivityViewUsersBinding
-import com.campushelper.app.data.remote.ApiService
 import com.campushelper.app.ui.adapter.UserAdapter
-import dagger.hilt.android.AndroidEntryPoint
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.launch
-import javax.inject.Inject
+import kotlinx.coroutines.tasks.await
 
-@AndroidEntryPoint
 class ViewUsersActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityViewUsersBinding
     private lateinit var userAdapter: UserAdapter
-    
-    @Inject
-    lateinit var apiService: ApiService
+    private val usersRef = FirebaseDatabase.getInstance().reference.child("users")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,26 +46,27 @@ class ViewUsersActivity : AppCompatActivity() {
                 binding.progressBar.isVisible = true
                 binding.rvUsers.isVisible = false
                 binding.layoutEmpty.isVisible = false
-                
-                val response = apiService.getAllUsers()
-                
-                if (response.isSuccessful && response.body() != null) {
-                    val users = response.body()!!.users
-                    
-                    binding.progressBar.isVisible = false
-                    
-                    if (users.isEmpty()) {
-                        binding.layoutEmpty.isVisible = true
-                        binding.rvUsers.isVisible = false
-                    } else {
-                        binding.layoutEmpty.isVisible = false
-                        binding.rvUsers.isVisible = true
-                        userAdapter.submitList(users)
-                    }
-                } else {
-                    binding.progressBar.isVisible = false
+
+                val snapshot = usersRef.get().await()
+                val users = snapshot.children.mapNotNull { child ->
+                    val id = child.child("id").getValue(String::class.java)
+                        ?: child.key
+                        ?: return@mapNotNull null
+                    val name = child.child("name").getValue(String::class.java) ?: return@mapNotNull null
+                    val email = child.child("email").getValue(String::class.java) ?: return@mapNotNull null
+                    val role = child.child("role").getValue(String::class.java) ?: "student"
+                    User(id = id, name = name, email = email, role = role)
+                }
+
+                binding.progressBar.isVisible = false
+
+                if (users.isEmpty()) {
                     binding.layoutEmpty.isVisible = true
-                    Toast.makeText(this@ViewUsersActivity, "Failed to load users", Toast.LENGTH_SHORT).show()
+                    binding.rvUsers.isVisible = false
+                } else {
+                    binding.layoutEmpty.isVisible = false
+                    binding.rvUsers.isVisible = true
+                    userAdapter.submitList(users)
                 }
             } catch (e: Exception) {
                 binding.progressBar.isVisible = false

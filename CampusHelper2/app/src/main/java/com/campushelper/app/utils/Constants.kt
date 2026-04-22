@@ -5,6 +5,7 @@ import com.campushelper.app.BuildConfig
 object Constants {
     // API Base URL comes from BuildConfig.BASE_URL (set in app/build.gradle.kts)
     const val BASE_URL = BuildConfig.BASE_URL
+    const val AI_FUNCTION_URL = BuildConfig.AI_FUNCTION_URL
     
     // SharedPreferences
     const val PREF_NAME = "campus_helper_prefs"

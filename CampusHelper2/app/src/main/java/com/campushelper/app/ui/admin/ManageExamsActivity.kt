@@ -35,6 +35,10 @@ class ManageExamsActivity : AppCompatActivity() {
         binding = ActivityManageExamsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        Toast.makeText(this, "Competitive exams are temporarily unavailable during Firebase migration", Toast.LENGTH_LONG).show()
+        finish()
+        return
+
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         

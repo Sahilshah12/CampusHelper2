@@ -10,6 +10,7 @@ data class TestRequest(
 data class Test(
     val _id: String,
     val userId: String,
+    val subjectId: String? = null,
     val title: String,
     val topic: String?,
     val questions: List<Question>,
@@ -17,7 +18,9 @@ data class Test(
     val score: Double,
     val totalQuestions: Int,
     val correctAnswers: Int,
-    val status: String
+    val status: String,
+    val createdAt: Long? = null,
+    val completedAt: Long? = null
 )
 
 data class TestResponse(
